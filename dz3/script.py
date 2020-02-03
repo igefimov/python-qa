@@ -28,7 +28,7 @@ with open("users.json", "r") as users_file:
         tmpDict["address"] = user["address"]
         tmpDict["books"] = []
         tmpDict["books"].append(books_list[i])
-        myList.append(tmpDict)
+        myList.append(tmpDict.copy())
         i += 1
 print myList
 
