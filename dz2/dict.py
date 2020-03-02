@@ -1,6 +1,5 @@
 import pytest
 
-
 class TestDict:
 
     test_data = [{'pear': 9}, {'cherry': 12}, {'plumb': 4}]
@@ -18,7 +17,7 @@ class TestDict:
     @pytest.mark.parametrize("x", test_data)
     def test_update_method(self, x):
         self.myDict.update(x)
-        print self.myDict
+        print(self.myDict)
         assert self.myDict[x.keys()[0]] == x.values()[0], "{0} is in the myDict".format(x)
 
     def test_clear_method(self):

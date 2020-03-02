@@ -3,6 +3,7 @@ import pytest
 from locators import CommonElements
 from selenium import webdriver
 
+
 @pytest.fixture
 def chrome(request):
     driver = webdriver.Chrome()
