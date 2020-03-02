@@ -1,7 +1,3 @@
-#TODO подчеркиваются импорты красным и пишет Unresolved reference 'locators'
-# Когда ставлю точку перед locators вот так:
-# from locators import CommonElements
-# больше не светится красным, но тест падает при запуске с ImportError: attempted relative import with no known parent package
 from locators import AdminLoginPage
 from locators import CatalogPage
 from locators import CommonElements
@@ -22,10 +18,9 @@ def test_01_main_page(chrome):
     except NoSuchElementException as e:
         print("My error handler:" + e.msg)
 
+
 def test_02_product_page(chrome):
-
-
-    #Click on 3rd featured product
+    # Click on 3rd featured product
     chrome.find_element(*MainPage.FEATURED_SECTION).find_elements_by_class_name("image")[2].click()
 
     try:
@@ -78,4 +73,3 @@ def test_05_search_results_page(chrome):
         chrome.find_element(*SearchResults.SEARCH_BUTTON)
     except NoSuchElementException as e:
         print("My error handler:" + e.msg)
-
