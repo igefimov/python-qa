@@ -1,14 +1,18 @@
-from abc import ABC, abstractmethod
+# -*- coding: utf-8 -*-
+
+from abc import abstractmethod
 from math import sqrt, pi as PI
 
 
-class Figure(ABC):
+class Figure:
 
     __name = None
     __type = None
     __angles = None
 
     def __init__(self, name, figure_type, angles_count):
+        if type(self) is Figure:
+            raise NotImplementedError("We cannot instantiate this class!")
         self.__name = name
         self.__type = figure_type
         self.__angles = angles_count
@@ -40,7 +44,7 @@ class Figure(ABC):
     def get_angels(self):
         return self.__angles
 
-    def add_square(self, other):
+    def add_area(self, other):
         if isinstance(other, Figure):
             return self.area + other.area
         else:
@@ -120,20 +124,20 @@ if __name__ == "__main__":
     # print(circle1.area)
     # print(circle1.perimeter)
     #
-    circle2 = Circle("круг", 20)
+    circle2 = Circle("circle2", 20)
     print(circle2)
 
-    # print(circle1.add_square(circle2))
+    # print(circle1.add_area(circle2))
     #
     #
     # print(circle2.get_type())
     #
     # print(circle2)
 
-    r = Rectangle("quad1", 10, 20)
-    print(r)
+    rectangle1 = Rectangle("rec1", 10, 20)
+    print(rectangle1)
 
-    print("Area sum of two previous figures is: {0}".format(r.add_square(circle2)))
+    print("Area sum of two previous figures is: {0}".format(rectangle1.add_area(circle2)))
 
     square1 = Square("square1", 10)
     print(square1)
