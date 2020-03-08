@@ -1,5 +1,4 @@
 from abc import abstractmethod
-from dz6a.source.Circle import Circle
 
 
 class Figure:
@@ -26,12 +25,8 @@ class Figure:
         pass
 
     def __str__(self):
-        if isinstance(self, Circle):
-            return "<--\nFigure Name: {0}\nFigure Type: {1}\nFigure Square: {2}\nFigure Perimeter: {3}\n-->"\
-                .format(self.__name, self.__type, format(self.area, '.3f'), format(self.perimeter, '.3f'))
-        else:
-            return "<--\nFigure Name: {0}\nFigure Type: {1}\nFigure Square: {2}\nFigure Perimeter: {3}\nFigure has {4} angels\n-->"\
-                .format(self.__name, self.__type, format(self.area, '.3f'), format(self.perimeter, '.3f'), self.__angles)
+        return "<--\nFigure Name: {0}\nFigure Type: {1}\nFigure Square: {2}\nFigure Perimeter: {3}\nFigure has {4} angels\n-->"\
+            .format(self.__name, self.__type, format(self.area, '.3f'), format(self.perimeter, '.3f'), self.__angles)
 
     def get_name(self):
         return self.__name

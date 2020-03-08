@@ -11,6 +11,10 @@ class Circle(Figure):
         super().__init__(name, self.__class__.__name__, 0)
         self.__radius = radius
 
+    def __str__(self):
+        return "<--\nFigure Name: {0}\nFigure Type: {1}\nFigure Square: {2}\nFigure Perimeter: {3}\n-->"\
+                .format(self.__name, self.__type, format(self.area, '.3f'), format(self.perimeter, '.3f'))
+
     @property
     def perimeter(self):
         return 2 * PI * self.__radius
@@ -20,6 +24,6 @@ class Circle(Figure):
         return PI * self.__radius * self.__radius
 
 
-# if __name__ == "__main__":
-#     circle1 = Circle("треугольник1", 15)
-#     print(circle1)
+if __name__ == "__main__":
+    circle1 = Circle("треугольник1", 15)
+    print(circle1)

@@ -19,3 +19,4 @@ class Triangle(Figure):
     @property
     def perimeter(self):
         return self.__lateralA + self.__lateralB + self.__lateralC
+
