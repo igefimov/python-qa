@@ -32,6 +32,7 @@ def test_05_circle_area_vs_perimeter():
     assert circle1.area > circle1.perimeter
     circle1 = Circle("circle1", 0.5)
     assert circle1.area < circle1.perimeter
+    print(circle1)
 
 
 def test_06_add_area():

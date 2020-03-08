@@ -13,7 +13,7 @@ class Circle(Figure):
 
     def __str__(self):
         return "<--\nFigure Name: {0}\nFigure Type: {1}\nFigure Square: {2}\nFigure Perimeter: {3}\n-->"\
-                .format(self.__name, self.__type, format(self.area, '.3f'), format(self.perimeter, '.3f'))
+                .format(self._name, self._type, format(self.area, '.3f'), format(self.perimeter, '.3f'))
 
     @property
     def perimeter(self):
@@ -22,8 +22,3 @@ class Circle(Figure):
     @property
     def area(self):
         return PI * self.__radius * self.__radius
-
-
-if __name__ == "__main__":
-    circle1 = Circle("треугольник1", 15)
-    print(circle1)
