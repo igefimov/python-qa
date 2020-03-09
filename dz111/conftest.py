@@ -1,7 +1,7 @@
 import pytest
 
 from .locators import AdminLoginPage, CommonElements, ProductsPage
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -19,7 +19,7 @@ def navigate_to_products_page(driver):
     driver.find_element(*AdminLoginPage.LOGIN_BUTTON).click()
     try:
         wait.until(EC.visibility_of_element_located(CommonElements.SECURITY_NOTIFICATION)).click()
-    except NoSuchElementException:
+    except TimeoutException:
         pass
     driver.find_element(*CommonElements.LEFT_MENU_CATALOG).click()
 
