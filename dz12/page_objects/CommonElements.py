@@ -7,4 +7,3 @@ class CommonElements:
     LEFT_MENU_CATALOG_CATEGORY = (By.CSS_SELECTOR, "#collapse1 > li")
     LEFT_MENU_CATALOG_LAST_CATEGORY = (By.CSS_SELECTOR, "#collapse1 > :nth-child(10)")
     SECURITY_NOTIFICATION = (By.CSS_SELECTOR, ".close")
-
