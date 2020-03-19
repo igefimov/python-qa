@@ -15,13 +15,6 @@ class ProductsPage(BasePage):
     EDIT_PRODUCT_BUTTON = (By.CSS_SELECTOR, "#form-product .btn-primary")
     NO_RESULT_TEXT = (By.XPATH, "//*[contains(text(), 'No results!')]")
     PRODUCT_MODEL = (By.CSS_SELECTOR, "#form-product table > tbody > tr > td:nth-child(4)")
-    # ProductDetailsPage
-    # PRODUCT_NAME_INPUT1 = (By.CSS_SELECTOR, "#input-name1")
-    # META_TITLE_INPUT = (By.CSS_SELECTOR, "#input-meta-title1")
-    # DATA_TAB = (By.CSS_SELECTOR, "#form-product li:nth-child(2)")
-    # MODEL_INPUT = (By.CSS_SELECTOR, "#input-model")
-    # SAVE_BUTTON = (By.CSS_SELECTOR, ".btn-primary")
-    # ALERT_SUCCESS = (By.CSS_SELECTOR, ".alert-success")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -33,13 +26,14 @@ class ProductsPage(BasePage):
         self._click(self.FILTER_BUTTON)
         self.wait.until(lambda wd: wd.execute_script("return document.readyState") == "complete")
 
-    def add_new_product(self, name, tag, model):
+    def add_new_product(self, name, tag, model, image):
         self.__filter(name)
         self._click(self.ADD_NEW_PRODUCT_BUTTON)
         self.productDetailsPage.\
             update_field("name", name). \
             update_field("model", model). \
             update_field("tag", tag).\
+            update_field("image", image).\
             save()
         self._wait(self.ALERT_SUCCESS)
 

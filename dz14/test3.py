@@ -1,19 +1,20 @@
-from .page_objects.AdminLoginPage import AdminLoginPage
-from .page_objects.DashBoardPage import DashBoardPage
-from .page_objects.SecurityNotification import SecurityNotification
-from .page_objects.ProductsPage import ProductsPage
+from page_objects.AdminLoginPage import AdminLoginPage
+from page_objects.DashBoardPage import DashBoardPage
+from page_objects.SecurityNotification import SecurityNotification
+from page_objects.ProductsPage import ProductsPage
 
 PRODUCT_NAME = "Test_product"
 PRODUCT_TAG = "Test_tag"
 PRODUCT_MODEL = "Test_model"
 PRODUCT_MODEL_NEW = "Test new model"
+PRODUCT_IMAGE = 'jb.jpg'
 
 
 def test_01_add_new_product(browser):
     AdminLoginPage(browser).login()
     SecurityNotification(browser).close()
     DashBoardPage(browser).navigate_to_products()
-    ProductsPage(browser).add_new_product(PRODUCT_NAME, PRODUCT_TAG, PRODUCT_MODEL)
+    ProductsPage(browser).add_new_product(PRODUCT_NAME, PRODUCT_TAG, PRODUCT_MODEL, PRODUCT_IMAGE)
     assert ProductsPage(browser).is_product_present(PRODUCT_NAME) is True, "{0} was added successfully".format(PRODUCT_NAME)
 
 

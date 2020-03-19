@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import re
 
 
 class BasePage:
@@ -20,6 +21,9 @@ class BasePage:
     def _element(self, locator):
         return self.driver.find_element(*locator)
 
+    def _elements(self, locator):
+        return self.driver.find_elements(*locator)
+
     def _input(self, locator, value):
         element = self._element(locator)
         element.clear()
@@ -27,6 +31,9 @@ class BasePage:
 
     def _wait(self, locator):
         self.wait.until(EC.visibility_of_element_located(locator))
+
+    def _wait_alert_is_present(self):
+        self.wait.until(EC.alert_is_present())
 
     def navigate_to_products(self):
         self._click(self.LEFT_MENU_CATALOG)
@@ -36,3 +43,7 @@ class BasePage:
             if category.text == "Products":
                 category.click()
                 break
+
+    @property
+    def get_user_token(self):
+        return re.search(r'user_token=(\w+)&?', self.driver.current_url).group(1)
