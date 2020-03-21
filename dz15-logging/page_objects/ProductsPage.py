@@ -22,11 +22,13 @@ class ProductsPage(BasePage):
         self.productDetailsPage = ProductDetailsPage(driver)
 
     def __filter(self, name):
+        self.logger.info("Filtering products by {0} name".format(name))
         self._input(self.PRODUCT_NAME_INPUT, name)
         self._click(self.FILTER_BUTTON)
         self.wait.until(lambda wd: wd.execute_script("return document.readyState") == "complete")
 
     def add_new_product(self, name, tag, model, image):
+        self.logger.info("Adding new product")
         self.__filter(name)
         self._click(self.ADD_NEW_PRODUCT_BUTTON)
         self.productDetailsPage.\
@@ -38,6 +40,7 @@ class ProductsPage(BasePage):
         self._wait(self.ALERT_SUCCESS)
 
     def update_product_model(self, name, model):
+        self.logger.info("Updating product model")
         self.__filter(name)
         self._click(self.CHECKBOX_ALL)
         self._click(self.EDIT_PRODUCT_BUTTON)
@@ -47,6 +50,7 @@ class ProductsPage(BasePage):
         self._wait(self.ALERT_SUCCESS)
 
     def delete_product_by_name(self, name):
+        self.logger.info("Deleting product by name {0}".format(name))
         self.__filter(name)
         self._click(self.CHECKBOX_ALL)
         self._click(self.DELETE_BUTTON)
@@ -64,6 +68,7 @@ class ProductsPage(BasePage):
             return is_present
 
     def get_product_model(self, name):
+        self.logger.info("Requesting model by product name {0}".format(name))
         if not self.is_product_present(name):
             raise NoSuchElementException("Product {0} is not present".format(name))
         return self._element(self.PRODUCT_MODEL).text

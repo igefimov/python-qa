@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
-
+import logging
 
 class BasePage:
 
@@ -12,6 +12,8 @@ class BasePage:
     ALERT_SUCCESS = (By.CSS_SELECTOR, ".alert-success")
 
     def __init__(self, driver):
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger.info("{0} initialized".format(self.__class__.__name__))
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 5)
 

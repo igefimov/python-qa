@@ -13,6 +13,7 @@ class SecurityNotification(BasePage):
         self.wait = WebDriverWait(self.driver, 5)
 
     def close(self):
+        self.logger.info("Closing Security Notification")
         try:
             self.wait.until(EC.visibility_of_element_located(self.SECURITY_NOTIFICATION)).click()
         except TimeoutException:

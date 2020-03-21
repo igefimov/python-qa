@@ -16,6 +16,7 @@ class AdminLoginPage(BasePage):
         self.driver.get(self.OPENCART_ADMIN_URL)
     
     def login(self):
+        self.logger.info("Logging into the Admin section")
         self._input(self.USERNAME_INPUT, self.USERNAME)
         self._input(self.PASSWORD_INPUT, self.PASSWORD)
         self._click(self.LOGIN_BUTTON)

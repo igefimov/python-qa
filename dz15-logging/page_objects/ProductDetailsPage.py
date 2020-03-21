@@ -19,6 +19,7 @@ class ProductDetailsPage(BasePage):
         super().__init__(driver)
 
     def update_field(self, field, value):
+        self.logger.info("Updating {0} field for current product".format(field))
         if field == "name":
             self._input(self.PRODUCT_NAME_INPUT, value)
             return self
