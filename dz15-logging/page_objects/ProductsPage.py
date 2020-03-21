@@ -59,13 +59,9 @@ class ProductsPage(BasePage):
 
     def is_product_present(self, name):
         self.__filter(name)
-        is_present = False
-        try:
-            self.driver.find_element(*self.NO_RESULT_TEXT)
-        except NoSuchElementException:
-            is_present = True
-        finally:
-            return is_present
+        if len(self.driver.find_elements(*self.NO_RESULT_TEXT)) == 0:
+            return True
+        return False
 
     def get_product_model(self, name):
         self.logger.info("Requesting model by product name {0}".format(name))
