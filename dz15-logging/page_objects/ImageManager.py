@@ -14,10 +14,10 @@ class ImageManager(BasePage):
         super().__init__(driver)
 
     def upload_image(self, image):
-        os.chdir('dz14/img')
+        os.chdir('img')
         filename = os.path.join(os.getcwd(), image)
         self.driver.execute_script(ON_CLICK_JS_EVENT.format(token=self.get_user_token))
-
+        os.chdir('..')
         input_manager = self.driver.find_element_by_css_selector("#form-upload > input[type=file]")
         input_manager.send_keys(filename)
         self._wait_alert_is_present()
