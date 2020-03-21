@@ -40,7 +40,6 @@ def browser(request):
     driver.maximize_window()
 
     def teardown():
-        driver.save_screenshot("screenshot/OK-{0}.png".format(datetime.now().strftime("%d-%b-%Y %H:%M:%S")))
         driver.close()
 
     request.addfinalizer(teardown)
