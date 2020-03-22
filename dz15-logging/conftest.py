@@ -34,15 +34,6 @@ class MyListener(AbstractEventListener):
         driver.save_screenshot("screenshot/ERR-{0}.png".format(datetime.now().strftime("%d-%b-%Y %H:%M:%S")))
 
 
-# def browser_error_check(driver):
-#     error_list = []
-#     b = driver.get_log("browser")
-#     for l in b:
-#         if l['level'] == "SEVERE":
-#             error_list.append(l)
-#     assert not error_list, "There are browser errors during the test execution:\n {0}".format(error_list)
-
-
 @pytest.fixture
 def browser(request):
     logger.info("===================== Launching browser =====================")
@@ -57,7 +48,6 @@ def browser(request):
     driver.maximize_window()
 
     def teardown():
-        # browser_error_check(driver)
         driver.close()
 
     request.addfinalizer(teardown)
