@@ -1,5 +1,6 @@
 from datetime import datetime
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 import logging
 import pytest
@@ -33,13 +34,30 @@ class MyListener(AbstractEventListener):
         driver.save_screenshot("screenshot/ERR-{0}.png".format(datetime.now().strftime("%d-%b-%Y %H:%M:%S")))
 
 
+# def browser_error_check(driver):
+#     error_list = []
+#     b = driver.get_log("browser")
+#     for l in b:
+#         if l['level'] == "SEVERE":
+#             error_list.append(l)
+#     assert not error_list, "There are browser errors during the test execution:\n {0}".format(error_list)
+
+
 @pytest.fixture
 def browser(request):
     logger.info("===================== Launching browser =====================")
-    driver = EventFiringWebDriver(webdriver.Chrome(), MyListener())
+    desired_capabilities = DesiredCapabilities.CHROME
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option('w3c', False)
+    desired_capabilities['loggingPrefs'] = {'browser': 'ALL'}
+    driver = EventFiringWebDriver(
+        webdriver.Chrome(desired_capabilities=desired_capabilities, options=options),
+        MyListener()
+    )
     driver.maximize_window()
 
     def teardown():
+        # browser_error_check(driver)
         driver.close()
 
     request.addfinalizer(teardown)
