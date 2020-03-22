@@ -5,8 +5,12 @@ from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEven
 import logging
 import pytest
 
+
+def pytest_addoption(parser):
+    parser.addoption("--file", action="store", default="", help="Specify file to store Webdriver logs")
+
+
 logging.basicConfig(
-    filename="log/test.log",
     format='%(asctime)s %(name)s [%(levelname)s]: %(message)s',
     level=logging.INFO
 )
@@ -36,6 +40,16 @@ class MyListener(AbstractEventListener):
 
 @pytest.fixture
 def browser(request):
+    log_file = request.config.getoption("--file")
+    if log_file:
+        for handler in logging.root.handlers[:]:
+            logging.root.removeHandler(handler)
+        logging.basicConfig(
+            filename=log_file,
+            format='%(asctime)s %(name)s [%(levelname)s]: %(message)s',
+            level=logging.INFO
+        )
+
     logger.info("===================== Launching browser =====================")
     desired_capabilities = DesiredCapabilities.CHROME
     options = webdriver.ChromeOptions()
