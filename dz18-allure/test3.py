@@ -11,7 +11,7 @@ PRODUCT_MODEL_NEW = "Test new model"
 PRODUCT_IMAGE = 'jb.jpg'
 
 
-@allure.title("Add new product to the system")
+@allure.title("Add new product {0} to the system".format(PRODUCT_NAME))
 @allure.tag("adminSection", "add")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_01_add_new_product(browser):
@@ -23,7 +23,7 @@ def test_01_add_new_product(browser):
         PRODUCT_NAME)
 
 
-@allure.title("Update products model")
+@allure.title("Update products {0} model".format(PRODUCT_NAME))
 @allure.tag("adminSection", "update")
 @allure.severity(allure.severity_level.NORMAL)
 def test_02_update_product_model(browser):
@@ -35,7 +35,7 @@ def test_02_update_product_model(browser):
         PRODUCT_NAME) == PRODUCT_MODEL_NEW, "{0} was updated successfully".format(PRODUCT_NAME)
 
 
-@allure.title("Remove product from the system")
+@allure.title("Remove product {0} from the system".format(PRODUCT_NAME))
 @allure.tag("adminSection", "delete")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_03_remove_product_by_its_name(browser):
