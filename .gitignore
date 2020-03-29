@@ -3,3 +3,6 @@
 __pycache__
 *.log
 *.pyc
+*.png
+allure-results/
+allure-report/
