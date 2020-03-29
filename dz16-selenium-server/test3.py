@@ -19,16 +19,18 @@ def browser_console_error_check(driver):
     assert not error_list, "There are browser errors during the test execution:\n {0}".format(error_list)
 
 
-def test_01_add_new_product(browser):
+def test_01_add_new_product(remote):
+    browser = remote
     AdminLoginPage(browser).login()
     SecurityNotification(browser).close()
     DashBoardPage(browser).navigate_to_products()
     ProductsPage(browser).add_new_product(PRODUCT_NAME, PRODUCT_TAG, PRODUCT_MODEL, PRODUCT_IMAGE)
     assert ProductsPage(browser).is_product_present(PRODUCT_NAME) is True, "{0} was added successfully".format(PRODUCT_NAME)
-    browser_console_error_check(browser)
+    browser_console_error_check(remote)
 
 
-def test_02_update_product_model(browser):
+def test_02_update_product_model(remote):
+    browser = remote
     AdminLoginPage(browser).login()
     SecurityNotification(browser).close()
     DashBoardPage(browser).navigate_to_products()
@@ -37,10 +39,21 @@ def test_02_update_product_model(browser):
     browser_console_error_check(browser)
 
 
-def test_03_remove_product_by_its_name(browser):
+def test_03_remove_product_by_its_name(remote):
+    browser = remote
     AdminLoginPage(browser).login()
     SecurityNotification(browser).close()
     DashBoardPage(browser).navigate_to_products()
     ProductsPage(browser).delete_product_by_name(PRODUCT_NAME)
     assert ProductsPage(browser).is_product_present(PRODUCT_NAME) is False, "{0} was removed successfully".format(PRODUCT_NAME)
     browser_console_error_check(browser)
+
+
+def test_04_add_new_product(browserstack):
+    browser = browserstack
+    AdminLoginPage(browser).login()
+    SecurityNotification(browser).close()
+    DashBoardPage(browser).navigate_to_products()
+    ProductsPage(browser).add_new_product(PRODUCT_NAME, PRODUCT_TAG, PRODUCT_MODEL, PRODUCT_IMAGE)
+    assert ProductsPage(browser).is_product_present(PRODUCT_NAME) is True, "{0} was added successfully".format(PRODUCT_NAME)
+    browser_console_error_check(browserstack)

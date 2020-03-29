@@ -6,6 +6,9 @@ class AdminLoginPage(BasePage):
     OPENCART_ADMIN_URL = "http://192.168.0.122/opencart/admin/"
     USERNAME = "admin"
     PASSWORD = "admin"
+    # OPENCART_ADMIN_URL = "https://demo.opencart.com/admin"
+    # USERNAME = "demo"
+    # PASSWORD = "demo"
     USERNAME_INPUT = (By.CSS_SELECTOR, "#input-username")
     PASSWORD_INPUT = (By.CSS_SELECTOR, "#input-password")
     LOGIN_BUTTON = (By.CSS_SELECTOR, ".btn-primary")

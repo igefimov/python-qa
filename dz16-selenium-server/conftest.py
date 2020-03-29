@@ -8,6 +8,9 @@ import pytest
 
 def pytest_addoption(parser):
     parser.addoption("--file", action="store", default="", help="Specify file to store Webdriver logs")
+    parser.addoption("--browser", action="store", default="chrome", choices=["chrome", "firefox", "safari", "opera"])
+    parser.addoption("--executor", action="store", default="192.168.0.123")
+    parser.addoption("--headless", action="store_true", default="True", help="Specify browser: Chrome or Firefox")
 
 
 logging.basicConfig(
@@ -65,4 +68,46 @@ def browser(request):
         driver.close()
 
     request.addfinalizer(teardown)
+    return driver
+
+
+@pytest.fixture
+def remote(request):
+    browser = request.config.getoption("--browser")
+    executor = request.config.getoption("--executor")
+    options = None
+    if browser == "chrome":
+        options = webdriver.ChromeOptions()
+    if browser == "firefox":
+        options = webdriver.FirefoxOptions()
+    if options is None:
+        raise NotImplementedError("We don't support {0} browser at this moment".format(browser))
+    if request.config.getoption("--headless"):
+        options.add_argument("-headless")
+        options.add_argument("--window-size=1600,1200")
+
+    driver = webdriver.Remote(command_executor=f"http://{executor}:4444/wd/hub",
+                              desired_capabilities={"browserName": browser},
+                              options=options
+                              )
+    driver.maximize_window()
+    request.addfinalizer(driver.quit)
+    return driver
+
+
+@pytest.fixture
+def browserstack(request):
+    desired_cap = {
+        'browser': 'Chrome',
+        'browser_version': '80.0',
+        'os': 'Windows',
+        'os_version': '10',
+        'resolution': '1024x768',
+        'name': 'Bstack-[Python] Sample Test'
+    }
+
+    driver = webdriver.Remote(
+        command_executor='http://igorefimov1:XXXt@hub-cloud.browserstack.com/wd/hub',
+        desired_capabilities=desired_cap)
+    request.addfinalizer(driver.quit)
     return driver
