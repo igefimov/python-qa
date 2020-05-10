@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 from .BasePage import BasePage
+import os
 
 
 class AdminLoginPage(BasePage):
-    OPENCART_ADMIN_URL = "http://192.168.0.122/opencart/admin/"
+    # OPENCART_ADMIN_URL = "http://192.168.0.122/opencart/admin/"
+    OPENCART_ADMIN_URL = os.getenv('ADMIN_URL', "http://192.168.0.122/opencart/admin")
     USERNAME = "admin"
     PASSWORD = "admin"
     USERNAME_INPUT = (By.CSS_SELECTOR, "#input-username")

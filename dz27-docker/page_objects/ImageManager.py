@@ -14,7 +14,7 @@ class ImageManager(BasePage):
         super().__init__(driver)
 
     def upload_image(self, image):
-        os.chdir('dz27-docker/img')
+        os.chdir('img')
         filename = os.path.join(os.getcwd(), image)
         self.driver.execute_script(ON_CLICK_JS_EVENT.format(token=self.get_user_token))
 
